@@ -1,5 +1,5 @@
-name: \[HACK DAY\] Woo Extension - Prepare New Release
-run-name:  Woo Extension - Prepare New Release ${{ inputs.type }}/${{ inputs.version }} from ${{ github.ref }} by @${{ github.actor }}
+name: '[HACK DAY] Woo Extension - Prepare New Release'
+run-name:  Woo Extension - Prepare New Release ${{ inputs.type }}/${{ inputs.version }} from `${{ github.ref }}` ${{ github.head_ref }} by @${{ github.actor }}
 
 # **What it does**: Does release preparation, creates bracnh, TODO lsit in PR, generate changelog.
 # **Why we have it**: To support dev automating as much as possible, and leave nice reference for the consumers
@@ -24,7 +24,6 @@ jobs:
   PrepareRelease:
     name: Prepare Release
     runs-on: ubuntu-latest
-    needs: CheckCreatedBranch
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
