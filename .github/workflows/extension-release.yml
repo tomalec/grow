@@ -20,6 +20,11 @@ on:
         description: 'WordPress tested up to'
       wc_version:
         description: 'WooCommerce tested up to'
+      main_branch:
+        description: 'Where release branches are merged'
+        required: true
+        default: 'trunk'
+
 
 jobs:
   PrepareRelease:
@@ -53,7 +58,7 @@ jobs:
             await script( {
               github,
               context,
-              base: '${{ github.ref }}',
+              base: '${{ github.event.inputs.main_branch }}',
               repository: '${{ github.repository }}',
               refName: '${{ steps.release-vars.outputs.branch }}',
               type: '${{ github.event.inputs.type }}',

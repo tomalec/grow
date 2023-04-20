@@ -8,9 +8,9 @@ export default async ( { github, context, base, refName, type, version, wp_versi
 	// const { heading, content } = packageTool.getChangelogByVersion( version );
 
 	// Build repo URL. WooRelease expects HTML one with `https://github.com/…/tree…`.
-	const repoURL = context.repository.html_url + '/tree/' + type + '/' + version;
+	const repoURL = context.payload.repository.html_url + '/tree/' + type + '/' + version;
 	// Assume extension package is called as the repo.
-	const extensionPackageName = context.repository.name;
+	const extensionPackageName = context.payload.repository.name;
 
 	let tested_versions =
 		( wp_version ? ' --wp_tested=' + wp_version : '' ) +
