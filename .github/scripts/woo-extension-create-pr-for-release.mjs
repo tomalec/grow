@@ -3,14 +3,14 @@
  */
 // import PackageTool from '../../packages/js/github-actions/utils/package-tool.js';
 
-export default async ( { github, context, base, refName, type, version, wp_version, wc_version } ) => {
+export default async ( { github, context, repository, base, refName, type, version, wp_version, wc_version } ) => {
 	// const packageTool = new PackageTool( 'packages/js/github-actions' );
 	// const { heading, content } = packageTool.getChangelogByVersion( version );
 
 	// Build repo URL. We cannot use `github.repository_url` as WooRelease expects HTTP…`/tree` one.
-	const repoURL = github.server_url + '/' + github.repository + '/tree/' + type + '/' + version;
+	const repoURL = 'https://github.com/' + repository + '/tree/' + type + '/' + version;
 	// Assume extension package is called as the repo.
-	const extensionPackageName = JSON.stringify( github );// github.repository.split('/')[1];
+	const extensionPackageName = JSON.stringify( context );// github.repository.split('/')[1];
 
 	let tested_versions =
 		( wp_version ? ' --wp_tested=' + wp_version : '' ) +

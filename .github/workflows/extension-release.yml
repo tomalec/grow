@@ -70,6 +70,7 @@ jobs:
               github,
               context,
               base: '${{ github.ref }}',
+              repository: '${{ github.repository }}'
               refName: '${{ steps.release-vars.outputs.branch }}',
               type: '${{ github.event.inputs.type }}',
               version: '${{ github.event.inputs.version }}',
