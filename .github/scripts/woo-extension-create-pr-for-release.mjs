@@ -10,11 +10,11 @@ export default async ( { github, context, repository, base, refName, type, versi
 	// Build repo URL. We cannot use `github.repository_url` as WooRelease expects HTTP…`/tree` one.
 	const repoURL = 'https://github.com/' + repository + '/tree/' + type + '/' + version;
 	// Assume extension package is called as the repo.
-	const extensionPackageName = JSON.stringify( context );// github.repository.split('/')[1];
+	const extensionPackageName = JSON.stringify( context.payload );// github.repository.split('/')[1];
 
 	let tested_versions =
 		( wp_version ? ' --wp_tested=' + wp_version : '' ) +
-		( wc_version ? ' --wc_tested=' + wp_version : '' );
+		( wc_version ? ' --wc_tested=' + wc_version : '' );
 
 	const title = `${ type } ${ version }`;
 	const body = `## Checks
