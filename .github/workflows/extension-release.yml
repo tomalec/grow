@@ -1,12 +1,13 @@
-name: Woo Extension - Prepare New Release
+name: \[HACK DAY\] Woo Extension - Prepare New Release
+run-name:  Woo Extension - Prepare New Release ${{ inputs.type }}/${{ inputs.version }} from ${{ github.ref }} by @${{ github.actor }}
+
+# **What it does**: Does release preparation, creates bracnh, TODO lsit in PR, generate changelog.
+# **Why we have it**: To support dev automating as much as possible, and leave nice reference for the consumers
+# **Who does it impact**: Docs content.
 
 on:
   workflow_dispatch:
     inputs:
-      branch:
-        description: 'Branch to release from'
-        required: true
-        default: 'develop'
       version:
         description: 'Version number to be released'
         required: true
@@ -20,21 +21,6 @@ on:
         description: 'WC tested up to version'
 
 jobs:
-  CheckCreatedBranch:
-    name: Check Created Branch
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check created release branch
-        uses: actions/github-script@v6
-        with:
-          script: |
-            if ( ! context.payload.created ) {
-              await github.rest.actions.cancelWorkflowRun( {
-                ...context.repo,
-                run_id: context.runId,
-              } );
-            }
-
   PrepareRelease:
     name: Prepare Release
     runs-on: ubuntu-latest
@@ -42,8 +28,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
-        with:
-          ref: ${{ github.event.inputs.branch }}
 
       - name: Prepare node
         uses: ./packages/js/github-actions/actions/prepare-node
@@ -86,7 +70,7 @@ jobs:
             await script( {
               github,
               context,
-              base: '${{ github.event.inputs.branch }}',
+              base: '${{ github.ref }}',
               refName: '${{ github.event.inputs.type }}/${{ github.event.inputs.version }}',
               type: '${{ github.event.inputs.type }}'
               version: '${{ steps.get-notes.outputs.next-version }}',
