@@ -73,8 +73,8 @@ jobs:
               refName: '${{ steps.release-vars.outputs.branch }}',
               type: '${{ github.event.inputs.type }}',
               version: '${{ github.event.inputs.version }}',
-              wp_version,
-              wc_version
+              wp_version: '${{ github.event.inputs.wp_version }}',
+              wc_version: '${{ github.event.inputs.wc_version }}'
             } );
 
       # - name: Run WooRelease simulate
