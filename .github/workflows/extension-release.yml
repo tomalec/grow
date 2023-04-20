@@ -62,7 +62,7 @@ jobs:
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git checkout -b ${{ steps.release-vars.outputs.branch }}
 
-          git commit --allow-empty -q -m "Start the ${{ steps.release-vars.outputs.branch }} release."
+          git commit --allow-empty -q -m "Start `${{ steps.release-vars.outputs.branch }}`."
           git push --set-upstream origin ${{ steps.release-vars.outputs.branch }}
 
       - name: Create a pull request for release
@@ -76,6 +76,6 @@ jobs:
               context,
               base: '${{ github.ref }}',
               refName: '${{ github.event.inputs.type }}/${{ github.event.inputs.version }}',
-              type: '${{ github.event.inputs.type }}'
-              version: '${{ steps.get-notes.outputs.next-version }}',
+              type: '${{ github.event.inputs.type }}',
+              version: '${{ steps.get-notes.outputs.next-version }}'
             } );
