@@ -17,9 +17,9 @@ on:
         required: true
         default: 'release'
       wp_version:
-        description: 'WP tested up to version'
+        description: 'WordPress tested up to'
       wc_version:
-        description: 'WC tested up to version'
+        description: 'WooCommerce tested up to'
 
 jobs:
   PrepareRelease:
