@@ -60,10 +60,10 @@ jobs:
 
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git checkout -b ${{ steps.release-vars.branch }}
+          git checkout -b ${{ steps.release-vars.outputs.branch }}
 
-          git commit --allow-empty -q -m "Start the ${{ steps.release-vars.branch }} release."
-          git push --set-upstream origin ${{ steps.release-vars.branch }}
+          git commit --allow-empty -q -m "Start the ${{ steps.release-vars.outputs.branch }} release."
+          git push --set-upstream origin ${{ steps.release-vars.outputs.branch }}
 
       - name: Create a pull request for release
         uses: actions/github-script@v6
