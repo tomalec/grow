@@ -46,7 +46,7 @@ jobs:
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git checkout -b ${{ steps.release-vars.outputs.branch }}
 
-          git commit --allow-empty -q -m "Start \\\`${{ steps.release-vars.outputs.branch }}\\\`."
+          git commit --allow-empty -q -m "Start \`${{ steps.release-vars.outputs.branch }}\`."
           git push --set-upstream origin ${{ steps.release-vars.outputs.branch }}
 
       - name: Create a pull request for release
