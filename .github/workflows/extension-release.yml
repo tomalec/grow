@@ -1,5 +1,5 @@
 name: '[HACK DAY] Woo Extension - Prepare New Release'
-run-name:  Woo Extension - Prepare New Release `${{ inputs.type }}/${{ inputs.version }}` from `${{ github.head_ref || github.ref }}` by @${{ github.actor }}
+run-name:  Woo Extension - Prepare New Release `${{ step.release-vars.branch }}` from `${{ github.head_ref || github.ref }}` by @${{ github.actor }}
 
 # **What it does**: Does release preparation, creates bracnh, TODO lsit in PR, generate changelog.
 # **Why we have it**: To support dev automating as much as possible, and leave nice reference for the consumers
@@ -25,6 +25,10 @@ jobs:
     name: Prepare Release
     runs-on: ubuntu-latest
     steps:
+      - name: Set release branch name
+        id: release-vars
+        run: echo "branch=${{ github.event.inputs.type }}/${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+
       - name: Checkout repository
         uses: actions/checkout@v3
 
@@ -52,13 +56,14 @@ jobs:
 
           TODAY=$(date '+%Y-%m-%d')
           NEXT_VER="${{ github.event.inputs.version }}"
+          REALESE_BRANCH="${{ github.event.inputs.type }}/${{ github.event.inputs.version }}"
 
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git checkout -b ${{ github.event.inputs.type }}/${{ github.event.inputs.version }}
+          git checkout -b ${{ step.release-vars.branch }}
 
-          git commit --allow-empty -q -m "Start the ${{ github.event.inputs.type }}/${{ github.event.inputs.version }} release."
-          git push
+          git commit --allow-empty -q -m "Start the ${{ step.release-vars.branch }} release."
+          git push --set-upstream origin ${{ step.release-vars.branch }}
 
       - name: Create a pull request for release
         uses: actions/github-script@v6
