@@ -33,22 +33,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Prepare node
-        uses: ./packages/js/github-actions/actions/prepare-node
-        with:
-          node-version: 14
-          cache-dependency-path: ./packages/js/github-actions/package-lock.json
-          install-deps: "no"
-
-      # The checkout revision of this repo itself doesn't have the built actions,
-      # so it needs to build them before using it locally.
-      - name: Build actions
-        run: |
-          cd ./packages/js/github-actions
-          npm ci --ignore-scripts
-          npm run build
-          cd -
-
       - name: Prepare release commits
         # Use the github-actions bot account to commit.
         # https://api.github.com/users/github-actions%5Bbot%5D
@@ -70,7 +54,7 @@ jobs:
               github,
               context,
               base: '${{ github.ref }}',
-              repository: '${{ github.repository }}'
+              repository: '${{ github.repository }}',
               refName: '${{ steps.release-vars.outputs.branch }}',
               type: '${{ github.event.inputs.type }}',
               version: '${{ github.event.inputs.version }}',
