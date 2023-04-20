@@ -1,5 +1,5 @@
 name: '[HACK DAY] Woo Extension - Prepare New Release'
-run-name:  Woo Extension - Prepare New Release ${{ inputs.type }}/${{ inputs.version }} from `${{ github.ref }}` ${{ github.head_ref }} by @${{ github.actor }}
+run-name:  Woo Extension - Prepare New Release `${{ inputs.type }}/${{ inputs.version }}` from `${{ github.head_ref || github.ref }}` by @${{ github.actor }}
 
 # **What it does**: Does release preparation, creates bracnh, TODO lsit in PR, generate changelog.
 # **Why we have it**: To support dev automating as much as possible, and leave nice reference for the consumers
@@ -57,7 +57,7 @@ jobs:
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
           git checkout -b ${{ github.event.inputs.type }}/${{ github.event.inputs.version }}
 
-          git commit -q -m "Start the ${{ github.event.inputs.type }}/${{ github.event.inputs.version }} release."
+          git commit --allow-empty -q -m "Start the ${{ github.event.inputs.type }}/${{ github.event.inputs.version }} release."
           git push
 
       - name: Create a pull request for release
