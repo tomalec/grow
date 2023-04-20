@@ -1,4 +1,4 @@
-name: [HACKDAY] Woo Extension - Prepare New Release
+name: Woo Extension - Prepare New Release
 
 on:
   workflow_dispatch:
