@@ -27,61 +27,16 @@ on:
 
 
 jobs:
-  PrepareRelease:
-    name: Prepare Release
+  Prepare release:
+    name: Prepare release
     runs-on: ubuntu-latest
     steps:
-      - name: Set release branch name
-        id: release-vars
-        run: echo "branch=${{ github.event.inputs.type }}/${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
-
       - name: Checkout repository
         uses: actions/checkout@v3
-
-      - name: Prepare release commits
-        # Use the github-actions bot account to commit.
-        # https://api.github.com/users/github-actions%5Bbot%5D
-        run: |
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          git checkout -b ${{ steps.release-vars.outputs.branch }}
-
-          git commit --allow-empty -q -m "Start \\\`${{ steps.release-vars.outputs.branch }}\\\`."
-          git push --set-upstream origin ${{ steps.release-vars.outputs.branch }}
-
-      - name: Create a pull request for release
-        uses: actions/github-script@v6
+      - uses: woocommerce/grow/prepare-extension-release@actions-v1.5.2-pre
         with:
-          script: |
-            const workspace = '${{ github.workspace }}';
-            const { default: script } = await import( `${ workspace }/.github/scripts/woo-extension-create-pr-for-release.mjs` );
-            await script( {
-              github,
-              context,
-              base: '${{ github.event.inputs.main_branch }}',
-              repository: '${{ github.repository }}',
-              refName: '${{ steps.release-vars.outputs.branch }}',
-              type: '${{ github.event.inputs.type }}',
-              version: '${{ github.event.inputs.version }}',
-              wp_version: '${{ github.event.inputs.wp_version }}',
-              wc_version: '${{ github.event.inputs.wc_version }}'
-            } );
-
-      # - name: Run WooRelease simulate
-      #   # Use the github-actions bot account to commit.
-      #   # https://api.github.com/users/github-actions%5Bbot%5D
-      #   run: |
-      #     wget -O /tmp/z.$$ https://github.com/woocommerce/woorelease/releases/download/2.4.0/woorelease.zip && unzip /tmp/z.$$ rm /tmp/z.$$
-
-      #     php
-
-      #     TODAY=$(date '+%Y-%m-%d')
-      #     NEXT_VER="${{ github.event.inputs.version }}"
-      #     REALESE_BRANCH="${{ github.event.inputs.type }}/${{ github.event.inputs.version }}"
-
-      #     git config user.name github-actions[bot]
-      #     git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-      #     git checkout -b ${{ steps.release-vars.outputs.branch }}
-
-      #     git commit --allow-empty -q -m "Start \\\`${{ steps.release-vars.outputs.branch }}\\\`."
-      #     git push --set-upstream origin ${{ steps.release-vars.outputs.branch }}
+          version: ${{ github.event.inputs.version }}
+          type: ${{ github.event.inputs.type }}
+          wp_version: ${{ github.event.inputs.wp_version }}
+          wc_version: ${{ github.event.inputs.wc_version }}
+          main_branch: 'trunk'
