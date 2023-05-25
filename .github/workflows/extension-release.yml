@@ -27,7 +27,7 @@ on:
 
 
 jobs:
-  Prepare release:
+  Prepare_release:
     name: Prepare release
     runs-on: ubuntu-latest
     steps:
