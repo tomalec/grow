@@ -37,10 +37,11 @@ jobs:
           wp_version: ${{ github.event.inputs.wp_version }}
           wc_version: ${{ github.event.inputs.wc_version }}
           main_branch: 'trunk'
-          preSteps: 'a
+          preSteps: >
             - [ ] Review recent PRs & issues to check for critical or release blocker issues and get them wrapped up as needed.
             - [ ] Check unit tests are passing (GitHub Actions)'
-          postSteps: "### Non-code checklist
+          postSteps: >
+            Non-code checklist
             - [ ] Update documentation
               - [ ] Publish any new required docs
               - [ ] Update triggers/rules/actions listing pages
@@ -60,4 +61,4 @@ jobs:
             - [ ] If minimum requirements have changed, update:
               - https://woocommerce.com/products/automatewoo/ > \"Information & Requirements\"
             - [ ] [Notify translators of the new release](https://github.com/woocommerce/automatewoo/wiki/Deploying-AutomateWoo-or-an-AutomateWoo-add-on#updating-translations)
-            "
+
