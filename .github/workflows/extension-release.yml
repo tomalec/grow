@@ -34,13 +34,13 @@ jobs:
         with:
           version: ${{ github.event.inputs.version }}
           type: ${{ github.event.inputs.type }}
-          wp_version: ${{ github.event.inputs.wp_version }}
-          wc_version: ${{ github.event.inputs.wc_version }}
-          main_branch: 'trunk'
-          preSteps: >
+          wp-version: ${{ github.event.inputs.wp_version }}
+          wc-version: ${{ github.event.inputs.wc_version }}
+          main-branch: 'trunk'
+          pre-steps: >
             - [ ] Review recent PRs & issues to check for critical or release blocker issues and get them wrapped up as needed.
             - [ ] Check unit tests are passing (GitHub Actions)'
-          postSteps: >
+          post-steps: >
             Non-code checklist
             - [ ] Update documentation
               - [ ] Publish any new required docs
