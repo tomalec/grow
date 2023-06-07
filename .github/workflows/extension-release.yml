@@ -40,7 +40,7 @@ jobs:
           preSteps: 'a
             - [ ] Review recent PRs & issues to check for critical or release blocker issues and get them wrapped up as needed.
             - [ ] Check unit tests are passing (GitHub Actions)'
-          postSteps: "### Non-code checklist:
+          postSteps: "### Non-code checklist
             - [ ] Update documentation
               - [ ] Publish any new required docs
               - [ ] Update triggers/rules/actions listing pages
@@ -50,7 +50,7 @@ jobs:
               - [ ] Notify HEs waiting on bug fixes included in release so that they can follow up with customers
 
             <!--REMOVE THE NEXT SECTION WHEN DOING A PATCH RELEASE.-->
-            \#\#\# Major and minor releases only:
+            \#\#\# Major and minor releases only
             - [ ] Update the admin notice for this update at `AutomateWoo\UpdateNoticeManager` class
               - [ ] Update the `$version` variables
               - [ ] Add a short description about the update, main changes, etc. (`$description`)
