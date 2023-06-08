@@ -65,9 +65,9 @@ jobs:
             1. [ ] [Notify translators of the new release](https://github.com/woocommerce/automatewoo/wiki/Deploying-AutomateWoo-or-an-AutomateWoo-add-on#updating-translations)
       - name: Generate list using Markdown
         run: |
-          echo "This is the lead in sentence for the list" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY # this is a blank line
+          echo "Release PR created at " >> $GITHUB_STEP_SUMMARY
           echo "- Lets add a bullet point" >> $GITHUB_STEP_SUMMARY
           echo "- Lets add a second bullet point" >> $GITHUB_STEP_SUMMARY
-          echo "- How ${{ toJSON( steps.prepare-release-pr.outputs ) }}" >> $GITHUB_STEP_SUMMARY
+          echo "- How ${{ steps.prepare-release-pr.outputs }}" >> $GITHUB_STEP_SUMMARY
+          echo "- How ${{ toJSON( steps.prepare-release-pr.outputs.result ) }}" >> $GITHUB_STEP_SUMMARY
 
