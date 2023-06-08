@@ -44,30 +44,26 @@ jobs:
             1. [ ] Review recent PRs & issues to check for critical or release blocker issues and get them wrapped up as needed.
             1. [ ] Check unit tests are passing (GitHub Actions)
             1. [ ] For major and minor release: Update the admin notice for this update at `AutomateWoo\UpdateNoticeManager` class
-              - [ ] Update the `$version` variables
-              - [ ] Add a short description about the update, main changes, etc. (`$description`)
-              - [ ] Add the link to the release post (`$link`)
+               - [ ] Update the `$version` variables
+               - [ ] Add a short description about the update, main changes, etc. (`$description`)
+               - [ ] Add the link to the release post (`$link`)
           post-steps: |
             ### Non-code checklist
             1. [ ] Update documentation
-              - [ ] Publish any new required docs
-              - [ ] Update triggers/rules/actions listing pages
+               - [ ] Publish any new required docs
+               - [ ] Update triggers/rules/actions listing pages
             1. [ ] Mark related ideas complete on ideas board
             1. [ ] Publish a P2 post on [+automatap2](https://automatap2.wordpress.com)
-              - [ ] Highlight important changes in the release (similar to what's included in the changelog)
-              - [ ] Notify HEs waiting on bug fixes included in release so that they can follow up with customers
+               - [ ] Highlight important changes in the release (similar to what's included in the changelog)
+               - [ ] Notify HEs waiting on bug fixes included in release so that they can follow up with customers
 
             <!--REMOVE THE NEXT SECTION WHEN DOING A PATCH RELEASE.-->
             ### Major and minor releases only
             1. [ ] Publish blog post
             1. [ ] Announce in `#woo-announcements` Slack
-            1. [ ] If minimum requirements have changed, update:
-              - https://woocommerce.com/products/automatewoo/ > "Information & Requirements"
+            1. [ ] If minimum requirements have changed, update https://woocommerce.com/products/automatewoo/ > "Information & Requirements"
             1. [ ] [Notify translators of the new release](https://github.com/woocommerce/automatewoo/wiki/Deploying-AutomateWoo-or-an-AutomateWoo-add-on#updating-translations)
       - name: Generate list using Markdown
         run: |
-          echo "Release PR created at " >> $GITHUB_STEP_SUMMARY
-          echo "- branch ${{  steps.prepare-release-pr.outputs.branch-name }}" >> $GITHUB_STEP_SUMMARY
-          echo "- PR ${{ steps.prepare-release-pr.outputs.pr.html_url }}" >> $GITHUB_STEP_SUMMARY
-          echo "- PR obj ${{ fromJSON( steps.prepare-release-pr.outputs.pr ).html_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "Release PR created at ${{ fromJSON( steps.prepare-release-pr.outputs.pr ).html_url }}" >> $GITHUB_STEP_SUMMARY
 
