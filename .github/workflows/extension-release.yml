@@ -26,6 +26,7 @@ jobs:
   Prepare_release:
     name: Prepare release
     runs-on: ubuntu-latest
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -66,8 +67,7 @@ jobs:
       - name: Generate list using Markdown
         run: |
           echo "Release PR created at " >> $GITHUB_STEP_SUMMARY
-          echo "- Lets add a bullet point" >> $GITHUB_STEP_SUMMARY
-          echo "- Lets add a second bullet point" >> $GITHUB_STEP_SUMMARY
-          echo "- How ${{ steps.prepare-release-pr.outputs }}" >> $GITHUB_STEP_SUMMARY
-          echo "- How ${{ toJSON( steps.prepare-release-pr.outputs.result ) }}" >> $GITHUB_STEP_SUMMARY
+          echo "- branch ${{  steps.prepare-release-pr.outputs.branch-name }}" >> $GITHUB_STEP_SUMMARY
+          echo "- PR ${{ toJSON( steps.prepare-release-pr.outputs.pr ) }}" >> $GITHUB_STEP_SUMMARY
+          echo "- outputs json ${{ toJSON( steps.prepare-release-pr.outputs ) }}" >> $GITHUB_STEP_SUMMARY
 
