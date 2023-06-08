@@ -68,6 +68,6 @@ jobs:
         run: |
           echo "Release PR created at " >> $GITHUB_STEP_SUMMARY
           echo "- branch ${{  steps.prepare-release-pr.outputs.branch-name }}" >> $GITHUB_STEP_SUMMARY
-          echo "- PR ${{ steps.prepare-release-pr.outputs.pr }}" >> $GITHUB_STEP_SUMMARY
-          echo "- PR obj ${{ fromJSON( steps.prepare-release-pr.outputs.pr ) }}" >> $GITHUB_STEP_SUMMARY
+          echo "- PR ${{ steps.prepare-release-pr.outputs.pr.html_url }}" >> $GITHUB_STEP_SUMMARY
+          echo "- PR obj ${{ fromJSON( steps.prepare-release-pr.outputs.pr ).html_url }}" >> $GITHUB_STEP_SUMMARY
 
